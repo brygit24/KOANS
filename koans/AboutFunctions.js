@@ -102,8 +102,8 @@ describe("About Functions", function() {
     var add = new Function("a", "b", "return a + b;");
     expect(add(1, 2)).toBe(3);
      
-    var multiply = function(a, b) {return a * b;};
-    expect(multiply.toString()).toBe("function (a, b) {return a * b;}");
+    var multiply = function(a, b) {return a * b;};    
+    expect(multiply.toString()).toBe("function(a, b) {return a * b;}");
   });    
 
 });

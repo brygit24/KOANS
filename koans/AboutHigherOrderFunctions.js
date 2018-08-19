@@ -9,7 +9,9 @@ describe("About Higher Order Functions", function() {
 
   it("should use filter to return array items that meet a criteria", function () {
     var numbers = [1,2,3];
-    var odd     = _(numbers).filter(function(x) { return x % 2 !== 0 });
+    var odd     = _(numbers).filter(function(x) { 
+      return x % 2 !== 0; 
+    });
     
     expect(odd).toEqual([1,3]);
     expect(odd.length).toBe(2);
@@ -18,7 +20,9 @@ describe("About Higher Order Functions", function() {
     
   it("should use 'map' to transform each element", function() {
     var numbers      = [1, 2, 3];
-    var numbersPlus1 = _(numbers).map(function(x) { return x + 1 });
+    var numbersPlus1 = _(numbers).map(function(x) { 
+      return x + 1; 
+    });
     
     expect(numbersPlus1).toEqual([2,3,4]);
     expect(numbers).toEqual([1,2,3]);
@@ -26,13 +30,9 @@ describe("About Higher Order Functions", function() {
     
   it("should use 'reduce' to update the same result on each iteration", function () {
     var numbers   = [1, 2, 3];
-    var reduction = _(numbers).reduce(function(memo, x) {
-
-        // note: memo is the result from last call, and x is the current number
-        return memo + x;
-      }, 
-      /* initial */ 0
-    );
+    var reduction = _(numbers).reduce(function(acc, x) {        
+      return acc + x;
+    },0);
     
     expect(reduction).toBe(6);
     expect(numbers).toEqual([1,2,3]);
@@ -41,9 +41,8 @@ describe("About Higher Order Functions", function() {
   it("should use 'forEach' for simple iteration", function() {
     var numbers = [1,2,3];
     var msg     = "";
-    var isEven  = function(item) {
-        //msg += (item % 2) === 0;
-        msg = msg + (item % 2) === 0;
+    var isEven  = function(x) {        
+      msg = msg + (x % 2) === 0;
     };
 
     _(numbers).forEach(isEven);
@@ -56,7 +55,9 @@ describe("About Higher Order Functions", function() {
     var onlyEven = [2,4,6];
     var mixedBag = [2,4,5,6];
 
-    var isEven = function(x) { return x % 2 === 0 };
+    var isEven = function(x) { 
+      return x % 2 === 0; 
+    };
 
     expect(_(onlyEven).all(isEven)).toBe(true);
     expect(_(mixedBag).all(isEven)).toBe(false);
@@ -66,7 +67,9 @@ describe("About Higher Order Functions", function() {
     var onlyEven = [2,4,6];
     var mixedBag = [2,4,5,6];
 
-    var isEven = function(x) { return x % 2 === 0 };
+    var isEven = function(x) { 
+      return x % 2 === 0;
+    };
 
     expect(_(onlyEven).any(isEven)).toBe(true);
     expect(_(mixedBag).any(isEven)).toBe(true);
@@ -85,8 +88,12 @@ describe("About Higher Order Functions", function() {
   it("should use chain() ... .value() to use multiple higher order functions", function() {
     var result = _([ [0, 1], 2 ]).chain()
                      .flatten()
-                     .map(function(x) { return x+1 } )
-                     .reduce(function(sum, x) { return sum + x })
+                     .map(function(x) { 
+                      return x + 1 
+                      })
+                     .reduce(function(acc, x) { 
+                      return acc + x 
+                      })
                      .value();
 
     expect(result).toEqual(6);
